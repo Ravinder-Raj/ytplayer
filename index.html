@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Player</title>
+</head>
+<style>
+    #player{
+        display: flex;
+        border: 2px solid black;
+        margin: auto;
+    }
+</style>
+<body>
+    <div><h1>YouTube video player</h1></div>
+    <div id="player"></div>
+    <script>
+      
+        const apiKey = 'AIzaSyDuWL99RpP_DAUtbLST-J_2hxZ-doFavpM';
+
+        
+        const videoId = 'LXb3EKWsInQ?si=j3HLFxNxJC-77xb0'
+
+      
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: videoId,
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        
+        function onPlayerStateChange(event) {
+  
+            console.log('Player State:', event.data);
+        }
+
+        // Handle API loading error
+        function onYouTubeIframeAPIError() {
+            console.error('Error loading YouTube API');
+        }
+
+        function loadYouTubeApi() {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
+        window.onload = loadYouTubeApi;
+    </script>
+</body>
+</html>
